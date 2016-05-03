@@ -45,7 +45,7 @@ class Pattern
     end
 
     if wildcard_positions.length != other_pattern.wildcard_positions.length
-      return ((wildcard_positions.length <=> other_pattern.wildcard_positions.length)*-1)
+      return other_pattern.wildcard_positions.length <=> wildcard_positions.length
     end
 
     paired_wildcards = wildcard_positions.zip(other_pattern.wildcard_positions)
