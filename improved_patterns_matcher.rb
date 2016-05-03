@@ -1,3 +1,8 @@
+#so this is my improved patterns matcher, which i believe runs in linear time
+#the basic strategy is to assemble a tree, where each layer represents a subsequent element of the patterns/paths
+#we can then walk through the tree, going through both direct matches and wildcards
+#to get a list of all available matches
+#we can then use the patterns' sort method to figure out which pattern is the best match
 class ImprovedPatternsMatcher
   class TreeNode
     attr_accessor :branches, :leaves

@@ -1,6 +1,4 @@
 class Pattern
-  include Comparable
-
   attr_accessor :pattern, :input_string
 
   def initialize(input_string)
@@ -32,14 +30,18 @@ class Pattern
 
   #a quick style note: i normally really dislike multiple return statements in ruby
   #but it actually seemed like the best way to implement this
+  #if we wanted to be really fancy here we could define this as <=> and Comparable
+  #and be able to just straight do collection.sort, but i thought that was a little bit too Black Magic :)
   def compare_for_best_match(other_pattern)
     #i dont think this should ever actually come up, but put it in to make this more flexible
     if wildcard_positions == other_pattern.wildcard_positions
+      #0 means equality to rubys sort method
       return 0
     end
 
     #check to see if one has more wildcards
     if wildcard_positions.length != other_pattern.wildcard_positions.length
+      #the spaceship operator returns -1 if first is less, 1 if it's more, 0 if they're equal
       return wildcard_positions.length <=> other_pattern.wildcard_positions.length
     end
 
