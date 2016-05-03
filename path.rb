@@ -12,11 +12,6 @@ class Path
     if input_string[-1] == '/'
       input_string = input_string.slice(0..-2)
     end
-    input_string.split('/')
-  end
-
-
-  def path_length
-    path.length
+    input_string.split('/').map(&:to_sym)
   end
 end

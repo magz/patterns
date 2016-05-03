@@ -6,9 +6,15 @@ require 'ruby-debug'
 
 
 RSpec.describe Path do
-  describe '.parse_path_string' do
-    it do
-      expect(Path.parse_path_string('x,y,123,🐘🐘🐘')).to eq(['x', 'y', '123', '🐘🐘🐘'])
+  describe '.parse_input_string' do
+    it 'works without leading or trailing slash' do
+      expect(Path.parse_input_string('x/y/xyz/123/🐘🐘🐘')).to eq(['x', 'y', 'xyz', '123', '🐘🐘🐘'].map(&:to_sym))
+    end
+    it 'works with leading slash' do
+      expect(Path.parse_input_string('/x/y')).to eq(['x', 'y'].map(&:to_sym))
+    end
+    it 'works with trailing slash' do
+      expect(Path.parse_input_string('x/y/')).to eq(['x', 'y'].map(&:to_sym))
     end
   end
 end

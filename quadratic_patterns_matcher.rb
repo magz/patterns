@@ -9,6 +9,6 @@ class QuadraticPatternsMatcher
   end
 
   def quadratitic_match_candidates
-    @quadratitic_match_candidates ||= patterns.sort {|a,b| b.compare_for_best_match(a)}
+    @quadratitic_match_candidates ||= patterns.sort {|a,b| a.compare_for_best_match(b)}
   end
 end
