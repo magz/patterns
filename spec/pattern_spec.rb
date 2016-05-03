@@ -17,17 +17,17 @@ RSpec.describe Pattern do
     end
     it 'matches with wildcards' do
       pattern = Pattern.new('*,ʥ,*')
-      path = Path.new('🐘🐘🐘/ʥ/ψ')
+      path = Path.new('ᛥᛥᛥ/ʥ/ψ')
       expect(pattern.matches?(path)).to eq(true)
     end
     it "doesn't match with wildcards and nonmatches" do
       pattern = Pattern.new('*,ʥ,*')
-      path = Path.new('🐘🐘🐘/🐘/ψ')
+      path = Path.new('ᛥᛥᛥ/ᛥ/ψ')
       expect(pattern.matches?(path)).to eq(false)
     end
     it 'matches on unicode characters' do
-      pattern = Pattern.new('🐘🐘🐘,ʥ,ψ')
-      path = Path.new('🐘🐘🐘/ʥ/ψ')
+      pattern = Pattern.new('ᛥᛥᛥ,ʥ,ψ')
+      path = Path.new('ᛥᛥᛥ/ʥ/ψ')
       expect(pattern.matches?(path)).to eq(true)
     end
     it "doesn't match if unequal" do
