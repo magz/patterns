@@ -1,11 +1,10 @@
 class ImprovedPatternsMatcher
-  class TreeNode
-    attr_accessor :branch, :leaf
-    # def initialize(branch=nil, leaf=nil)
-    #   @branch = branch
-    #   @leaf = leaf
-    # end
-  end
+  # class TreeNode
+  #   attr_accessor :branch, :leaf
+  #   def initialize(branch=nil, leaf=nil)
+  #     @branch = branch
+  #     @leaf = leaf
+  # end
 
   attr_accessor :patterns
   def initialize(patterns)
@@ -31,12 +30,12 @@ class ImprovedPatternsMatcher
     patterns.each do |pattern|
       curent_patterns_hash_position = result
       pattern.pattern.slice(0..-2).each do |pattern_element|
-        #create the fur
-        curent_patterns_hash_position[pattern_element] ||= TreeNode.new()
-        curent_patterns_hash_position = curent_patterns_hash_position[pattern_element]
+        curent_patterns_hash_position[pattern_element] ||= {branch: {}}
+        curent_patterns_hash_position = curent_patterns_hash_position[pattern_element][:branch]
       end
 
-      curent_patterns_hash_position[pattern.pattern[-1]] = pattern
+      curent_patterns_hash_position[pattern.pattern[-1]] ||= {}
+      curent_patterns_hash_position[pattern.pattern[-1]][:pattern] = pattern
     end
     result
   end
@@ -46,10 +45,10 @@ class ImprovedPatternsMatcher
       walkable_branches = [tree[path.first], tree['*']].compact
 
       walkable_branches.map do |branch|
-        if (path.length != 1) && branch.is_a?(Hash)
-          walk_tree(path.slice(1..-1), branch)
-        elsif (path.length == 1) && branch.is_a?(Pattern)
-          branch
+        if (path.length != 1) && branch[:branch]
+          walk_tree(path.slice(1..-1), branch[:branch])
+        elsif (path.length == 1)
+          branch[:pattern]
         end
       end
     end
