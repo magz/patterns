@@ -1,20 +1,15 @@
 class Pattern
   include Comparable
 
-  attr_accessor :pattern
+  attr_accessor :pattern, :input_string
 
-  def initialize(pattern_string)
-    @pattern = self.class.parse_pattern_string(pattern_string)
+  def initialize(input_string)
+    @input_string = input_string
+    @pattern = self.class.parse_input_string(input_string)
   end
 
-  def self.parse_pattern_string(pattern_string)
-    if pattern_string[0] == '/'
-      pattern_string = pattern_string.slice(1..-1)
-    end
-    if pattern_string[-1] == '/'
-      pattern_string = pattern_string.slice(0..-2)
-    end
-    pattern_string.split('/')
+  def self.parse_input_string(input_string)
+    input_string.split(',')
   end
 
   def matches?(path)
@@ -42,28 +37,24 @@ class Pattern
   end
 
   #TODO: TEST
+  #a quick style note: i normally really dislike multiple return statements in ruby
+  #but it actually seemed like the best way to implement this
   def compare_for_best_match(other_pattern)
-    other_pattern_wildcard_positions = other_pattern.wildcard_positions
-
-    if wildcard_positions == []
-      if other_pattern_wildcard_positions == []
-        return 0
-      else
-        return -1
-      end
+    if wildcard_positions == other_pattern.wildcard_positions
+      return 0
     end
-    wildcard_positions.each_with_index do |wildcard_position, i|
-      other_pattern_wildcard_position = other_pattern_wildcard_positions[i]
-      if wildcard_position > other_pattern_wildcard_position
-        return -1
-      elsif wildcard_position < other_pattern_wildcard_position
-        return 1
+
+    if wildcard_positions.length != other_pattern.wildcard_positions.length
+      return ((wildcard_positions.length <=> other_pattern.wildcard_positions.length)*-1)
+    end
+
+    paired_wildcards = wildcard_positions.zip(other_pattern.wildcard_positions)
+    paired_wildcards.each do |wildcard_position, other_wildcard_position|
+      if wildcard_position != other_wildcard_position
+        return wildcard_position <=> other_wildcard_position
       end
     end
   end
-
-
-
 end
 
 
