@@ -1,9 +1,5 @@
 require './path.rb'
 require 'spec_helper'
-require 'ruby-debug'
-
-
-
 
 RSpec.describe Path do
   describe '.parse_input_string' do

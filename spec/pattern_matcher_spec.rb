@@ -1,8 +1,5 @@
 require './pattern_matcher.rb'
 require 'spec_helper'
-require 'ruby-debug'
-
-
 
 
 RSpec.describe PatternMatcher do

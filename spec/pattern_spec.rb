@@ -1,10 +1,6 @@
 require './pattern.rb'
 require './path.rb'
 require 'spec_helper'
-require 'ruby-debug'
-
-
-
 
 RSpec.describe Pattern do
   describe '#matches?' do

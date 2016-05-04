@@ -1,9 +1,5 @@
 require './input_processor.rb'
 require 'spec_helper'
-require 'ruby-debug'
-
-
-
 
 RSpec.describe InputProcessor do
   let(:filename) { 'test_input.txt' }

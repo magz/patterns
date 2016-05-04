@@ -3,7 +3,7 @@ require './improved_patterns_matcher.rb'
 require './pattern.rb'
 require './path.rb'
 require './input_processor.rb'
-require 'ruby-debug'
+
 
 class PatternMatcher
   def initialize(filepath, strategy='improved')
