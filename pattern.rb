@@ -20,6 +20,9 @@ class Pattern
     end
   end
 
+  #i used this strategy rather than assembling a regex because i didn't want, for example,
+  #aaa/b to match a,a,a,b....it's possible there's a way to make regex work for this, but since
+  #this was the slower strategy to begin with, i decided not to get into that
   def char_matches?(path_elem, pattern_elem)
     (path_elem == pattern_elem) || (pattern_elem == :*)
   end

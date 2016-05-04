@@ -62,6 +62,4 @@ class ImprovedPatternsMatcher
       [tree.leaves[path.first], tree.leaves[:*]]
     end
   end
-
-
 end
